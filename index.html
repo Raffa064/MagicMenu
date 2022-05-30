@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Magic menu</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg: hsla(235, 15%, 10%, 1);
+            --menu-bg: hsla(235, 0%, 100%, 1);
+            --menu-size: 70px;
+            --option-ball-size: 40px;
+            --option-ball-border-size: 4px;
+        }
+        
+        body {
+            background: var(--bg);
+            color: hsla(235, 15%, 50%, 1);
+            padding: 10px;
+        }
+        
+        h1, h2 {
+            display: inline;
+        }
+        
+        h2 {
+            font-size: 1.2em;
+        }
+        
+        hr {
+            background: hsla(235, 15%, 50%, 1);
+            border: hsla(235, 15%, 50%, 1) solid 1px;
+        }
+        
+        .magic-menu {
+            margin: 10px;
+            background: var(--menu-bg);
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .magic-menu[--type='footer'] {
+            width: calc(100vw - 20px);
+            position: fixed;
+            bottom: 0;
+        }
+        
+        .magic-menu[--type='footer'] > .options {
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .opt {
+            width: var(--menu-size);
+            height: var(--menu-size);
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .magic-menu[--type='footer'] > .options > .opt > .opt-icon {
+            width: calc(var(--option-ball-size) + var(--option-ball-border-size) * 2);
+            height: calc(var(--option-ball-size) + var(--option-ball-border-size) * 2);
+            position: absolute;
+            top: calc(var(--menu-size) / 2 - ( ( var(--option-ball-size) + var(--option-ball-border-size) * 2 ) / 2 ) );
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--menu-bg);
+            color: #555;
+            border: #aaa solid 1px;
+            border-radius: 50%;
+            transition: 0.5s;
+        }
+        
+        .magic-menu[--type='footer'] > .options > .opt.active > .opt-icon {
+            background: var(--accent);
+            color: var(--accent-dark);
+            border: var(--bg) solid var(--option-ball-border-size);
+            top: calc(0px - var(--option-ball-size) / 2);
+        }
+        
+        .magic-menu[--type='footer'] > .options > .opt > .opt-title {
+            color: #555;
+            opacity: 0%;
+            transition: 0.5s;
+        }
+        
+        .magic-menu[--type='footer'] > .options > .opt.active > .opt-title {
+            opacity: 100%;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <h1>Magic Menu</h1>
+    <h2>CSS maded menu</h2>
+    <hr>
+    <p>Is really easy to edit the indicator color, you only need to set the accent and accent-dark variables to your wanted color.</p>
+    <div class="magic-menu" --type="footer"> <!--I maked the --type to alow to create left/right menus, bud i will not implement it.-->
+        <ul class="options">
+            <li class="opt"><span class="opt-icon" style="--accent: #CF787B; --accent-dark: #604000;"><ion-icon name="home-outline"></ion-icon></span><span class="opt-title">Home</span></li>
+            <li class="opt"><span class="opt-icon" style="--accent: #7BCF78; --accent-dark: #006040;"><ion-icon name="planet-outline"></ion-icon></span><span class="opt-title">World</span></li>
+            <li class="opt"><span class="opt-icon" style="--accent: #70ddff; --accent-dark: #0080ff;"><ion-icon name="call-outline"></ion-icon></span><span class="opt-title">Suport</span></li>
+            <li class="opt"><span class="opt-icon" style="--accent: #aaaaaa; --accent-dark: #333333;"><ion-icon name="settings-outline"></ion-icon></span><span class="opt-title">Settings</span></li>
+        </ul>
+    </div>
+    <script>
+        var options = document.querySelectorAll('.opt')
+        function setOption() {
+            options.forEach((item) => item.classList.remove('active'))
+            this.classList.add('active')
+        }
+        options.forEach((item) => item.addEventListener('click', setOption))
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg .com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
