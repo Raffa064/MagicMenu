@@ -1,0 +1,77 @@
+:root {
+    --bg: <YOUR BACKGROUND COLOR>;
+    --menu-bg: #fff; /*MAGIC MENU BACKGROUND COLOR*/
+    --menu-size: 70px; /*MAGIC MENU HEIGHT*/
+    --option-text: #aaa; /*MAGIC MENU MENU OPTION TEXT COLOR*/
+    --option-inactive-border: #aaa; /*MAGIC MENU MENU OPTION INACTIVE BORDER COLOR*/
+    --option-ball-size: 40px; /*MAGIC MENU OPTION BALL SIZE*/
+    --option-ball-border-size: 4px; /*MAGIC MENU OPTION BALL BORDER SIZE (the "hole" in the menu background)*/
+}
+
+.magic-menu {
+    margin: 10px;
+    background: var(--menu-bg);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.magic-menu[--type='footer'] {
+    width: calc(100vw - 20px);
+    position: fixed;
+    bottom: 0;
+}
+
+.magic-menu[--type='footer']>.options {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.opt {
+    width: var(--menu-size);
+    height: var(--menu-size);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.magic-menu[--type='footer']>.options>.opt>.opt-icon {
+    z-index: 2;
+    width: calc(var(--option-ball-size) + var(--option-ball-border-size) * 2);
+    height: calc(var(--option-ball-size) + var(--option-ball-border-size) * 2);
+    position: absolute;
+    top: calc(var(--menu-size) / 2 - ((var(--option-ball-size) + var(--option-ball-border-size) * 2) / 2));
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--menu-bg);
+    color: var(--option-text);
+    border: var(--option-inactive-border) solid 1px;
+    border-radius: 50%;
+    transition: 0.5s;
+}
+
+.magic-menu[--type='footer']>.options>.opt.active>.opt-icon {
+    background: var(--accent);
+    color: var(--accent-dark);
+    border: var(--bg) solid var(--option-ball-border-size);
+    top: calc(0px - var(--option-ball-size) / 2);
+}
+
+.magic-menu[--type='footer']>.options>.opt>.opt-title {
+    z-index: 1;
+    color: var(--option-text);
+    opacity: 0%;
+    transition: 0.5s;
+}
+
+.magic-menu[--type='footer']>.options>.opt.active>.opt-title {
+    opacity: 100%;
+}
